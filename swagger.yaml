@@ -1,58 +1,78 @@
 openapi: 3.0.1
 info:
   title: Selling Partner API for A+ Content Management
-  description: With the A+ Content API, you can build applications that help selling
-    partners add rich marketing content to their Amazon product detail pages. A+ content
-    helps selling partners share their brand and product story, which helps buyers
-    make informed purchasing decisions. Selling partners assemble content by choosing
-    from content modules and adding images and text.
+  description: >-
+    With the A+ Content API, you can build applications that help selling
+    partners add rich marketing content to their Amazon product detail pages. A+
+    content helps selling partners share their brand and product story, which
+    helps buyers make informed purchasing decisions. Selling partners assemble
+    content by choosing from content modules and adding images and text.
   contact:
     name: Selling Partner API Developer Support
     url: https://sellercentral.amazon.com/gp/mws/contactus.html
   license:
     name: Apache License 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0
-  version: 2020-11-01
+  version: 2020-11-01T00:00:00.000Z
 servers:
-- url: https://sellingpartnerapi-na.amazon.com/
+  - url: https://sellingpartnerapi-na.amazon.com/
 paths:
   /aplus/2020-11-01/contentDocuments:
     get:
       tags:
-      - aplusContent
-      description: |-
-        Returns a list of all A+ Content documents assigned to a selling partner. This operation returns only the metadata of the A+ Content documents. Call the getContentDocument operation to get the actual contents of the A+ Content documents.
+        - aplusContent
+      description: >-
+        Returns a list of all A+ Content documents assigned to a selling
+        partner. This operation returns only the metadata of the A+ Content
+        documents. Call the getContentDocument operation to get the actual
+        contents of the A+ Content documents.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: searchContentDocuments
       parameters:
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: pageToken
-        in: query
-        description: A page token from the nextPageToken response element returned
-          by your previous call to this operation. nextPageToken is returned when
-          the results of a call exceed the page size. To get the next page of results,
-          call the operation and include pageToken as the only parameter. Specifying
-          pageToken with any other parameter will cause the request to fail. When
-          no nextPageToken value is returned there are no more pages to return. A
-          pageToken value is not usable across different operations.
-        schema:
-          minLength: 1
-          type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: pageToken
+          in: query
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
+          schema:
+            minLength: 1
+            type: string
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -67,7 +87,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchContentDocumentsResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -82,27 +102,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -113,7 +137,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -128,7 +152,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -136,16 +160,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -153,34 +179,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -188,9 +219,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -199,26 +232,40 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
     post:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Creates a new A+ Content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: createContentDocument
       parameters:
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
       requestBody:
         description: The content document request details.
         content:
@@ -227,7 +274,7 @@ paths:
               $ref: '#/components/schemas/PostContentDocumentRequest'
         required: true
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -242,7 +289,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostContentDocumentResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -257,27 +304,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -288,7 +339,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -303,7 +354,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -311,34 +362,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -346,9 +402,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -359,57 +417,73 @@ paths:
   /aplus/2020-11-01/contentDocuments/{contentReferenceKey}:
     get:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Returns an A+ Content document, if available.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: getContentDocument
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ Content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: includedDataSet
-        in: query
-        description: The set of A+ Content data types to include in the response.
-        required: true
-        style: form
-        explode: false
-        schema:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          items:
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
             type: string
-            enum:
-            - CONTENTS
-            - METADATA
-            x-docgen-enum-table-extension:
-            - value: CONTENTS
-              description: The contents of the content document.
-            - value: METADATA
-              description: The metadata of the content document.
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: includedDataSet
+          in: query
+          description: The set of A+ Content data types to include in the response.
+          required: true
+          style: form
+          explode: false
+          schema:
+            minItems: 1
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+                - CONTENTS
+                - METADATA
+              x-docgen-enum-table-extension:
+                - value: CONTENTS
+                  description: The contents of the content document.
+                - value: METADATA
+                  description: The metadata of the content document.
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -424,7 +498,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetContentDocumentResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -439,27 +513,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -470,7 +548,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -485,7 +563,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -493,16 +571,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -510,34 +590,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -545,9 +630,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -556,35 +643,51 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
     post:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Updates an existing A+ Content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: updateContentDocument
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ Content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
       requestBody:
         description: The content document request details.
         content:
@@ -593,7 +696,7 @@ paths:
               $ref: '#/components/schemas/PostContentDocumentRequest'
         required: true
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -608,7 +711,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostContentDocumentResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -623,27 +726,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -654,7 +761,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -669,7 +776,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -677,16 +784,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -694,34 +803,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -729,9 +843,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -742,78 +858,99 @@ paths:
   /aplus/2020-11-01/contentDocuments/{contentReferenceKey}/asins:
     get:
       tags:
-      - aplusContent
-      description: |-
-        Returns a list of ASINs related to the specified A+ Content document, if available. If you do not include the `asinSet` parameter, the operation returns all ASINs related to the content document.
+        - aplusContent
+      description: >-
+        Returns a list of ASINs related to the specified A+ Content document, if
+        available. If you do not include the `asinSet` parameter, the operation
+        returns all ASINs related to the content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: listContentDocumentAsinRelations
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ Content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: includedDataSet
-        in: query
-        description: The set of A+ Content data types to include in the response.
-          If you do not include this parameter, the operation returns the related
-          ASINs without metadata.
-        style: form
-        explode: false
-        schema:
-          minItems: 0
-          uniqueItems: true
-          type: array
-          items:
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
             type: string
-            enum:
-            - METADATA
-            x-docgen-enum-table-extension:
-            - value: METADATA
-              description: The metadata of the content document.
-      - name: asinSet
-        in: query
-        description: The set of ASINs.
-        style: form
-        explode: false
-        schema:
-          uniqueItems: true
-          type: array
-          items:
-            minLength: 10
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
             type: string
-      - name: pageToken
-        in: query
-        description: A page token from the nextPageToken response element returned
-          by your previous call to this operation. nextPageToken is returned when
-          the results of a call exceed the page size. To get the next page of results,
-          call the operation and include pageToken as the only parameter. Specifying
-          pageToken with any other parameter will cause the request to fail. When
-          no nextPageToken value is returned there are no more pages to return. A
-          pageToken value is not usable across different operations.
-        schema:
-          minLength: 1
-          type: string
+        - name: includedDataSet
+          in: query
+          description: >-
+            The set of A+ Content data types to include in the response. If you
+            do not include this parameter, the operation returns the related
+            ASINs without metadata.
+          style: form
+          explode: false
+          schema:
+            minItems: 0
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+                - METADATA
+              x-docgen-enum-table-extension:
+                - value: METADATA
+                  description: The metadata of the content document.
+        - name: asinSet
+          in: query
+          description: The set of ASINs.
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              minLength: 10
+              type: string
+        - name: pageToken
+          in: query
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
+          schema:
+            minLength: 1
+            type: string
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -828,7 +965,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListContentDocumentAsinRelationsResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -843,27 +980,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -874,7 +1015,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -889,7 +1030,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -897,16 +1038,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -914,34 +1057,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -949,9 +1097,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -960,35 +1110,54 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
     post:
       tags:
-      - aplusContent
-      description: |-
-        Replaces all ASINs related to the specified A+ Content document, if available. This may add or remove ASINs, depending on the current set of related ASINs. Removing an ASIN has the side effect of suspending the content document from that ASIN.
+        - aplusContent
+      description: >-
+        Replaces all ASINs related to the specified A+ Content document, if
+        available. This may add or remove ASINs, depending on the current set of
+        related ASINs. Removing an ASIN has the side effect of suspending the
+        content document from that ASIN.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentAsinRelations
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
       requestBody:
         description: The content document ASIN relations request details.
         content:
@@ -997,7 +1166,7 @@ paths:
               $ref: '#/components/schemas/PostContentDocumentAsinRelationsRequest'
         required: true
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -1012,7 +1181,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostContentDocumentAsinRelationsResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -1027,27 +1196,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -1058,7 +1231,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -1073,7 +1246,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -1081,16 +1254,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -1098,34 +1273,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -1133,9 +1313,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -1146,37 +1328,51 @@ paths:
   /aplus/2020-11-01/contentAsinValidations:
     post:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Checks if the A+ Content document is valid for use on a set of ASINs.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: validateContentDocumentAsinRelations
       parameters:
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: asinSet
-        in: query
-        description: The set of ASINs.
-        style: form
-        explode: false
-        schema:
-          uniqueItems: true
-          type: array
-          items:
-            minLength: 10
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
             type: string
+        - name: asinSet
+          in: query
+          description: The set of ASINs.
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              minLength: 10
+              type: string
       requestBody:
         description: The content document request details.
         content:
@@ -1185,7 +1381,7 @@ paths:
               $ref: '#/components/schemas/PostContentDocumentRequest'
         required: true
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -1199,8 +1395,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidateContentDocumentAsinRelationsResponse'
-        400:
+                $ref: >-
+                  #/components/schemas/ValidateContentDocumentAsinRelationsResponse
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -1215,27 +1412,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -1246,7 +1447,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -1261,7 +1462,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -1269,34 +1470,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -1304,9 +1510,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -1317,47 +1525,63 @@ paths:
   /aplus/2020-11-01/contentPublishRecords:
     get:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Searches for A+ Content publishing records, if available.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: searchContentPublishRecords
       parameters:
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: asin
-        in: query
-        description: The Amazon Standard Identification Number (ASIN).
-        required: true
-        schema:
-          minLength: 10
-          type: string
-      - name: pageToken
-        in: query
-        description: A page token from the nextPageToken response element returned
-          by your previous call to this operation. nextPageToken is returned when
-          the results of a call exceed the page size. To get the next page of results,
-          call the operation and include pageToken as the only parameter. Specifying
-          pageToken with any other parameter will cause the request to fail. When
-          no nextPageToken value is returned there are no more pages to return. A
-          pageToken value is not usable across different operations.
-        schema:
-          minLength: 1
-          type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: asin
+          in: query
+          description: The Amazon Standard Identification Number (ASIN).
+          required: true
+          schema:
+            minLength: 10
+            type: string
+        - name: pageToken
+          in: query
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
+          schema:
+            minLength: 1
+            type: string
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -1372,7 +1596,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchContentPublishRecordsResponse'
-        400:
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -1387,27 +1611,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -1418,7 +1646,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -1433,7 +1661,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -1441,34 +1669,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -1476,9 +1709,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -1488,37 +1723,53 @@ paths:
   /aplus/2020-11-01/contentDocuments/{contentReferenceKey}/approvalSubmissions:
     post:
       tags:
-      - aplusContent
-      description: |-
+        - aplusContent
+      description: >-
         Submits an A+ Content document for review, approval, and publishing.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentApprovalSubmission
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -1532,8 +1783,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostContentDocumentApprovalSubmissionResponse'
-        400:
+                $ref: >-
+                  #/components/schemas/PostContentDocumentApprovalSubmissionResponse
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -1548,27 +1800,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -1579,7 +1835,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -1594,7 +1850,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -1602,16 +1858,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -1619,34 +1877,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -1654,9 +1917,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -1666,37 +1931,54 @@ paths:
   /aplus/2020-11-01/contentDocuments/{contentReferenceKey}/suspendSubmissions:
     post:
       tags:
-      - aplusContent
-      description: |-
-        Submits a request to suspend visible A+ Content. This neither deletes the content document nor the ASIN relations.
+        - aplusContent
+      description: >-
+        Submits a request to suspend visible A+ Content. This neither deletes
+        the content document nor the ASIN relations.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentSuspendSubmission
       parameters:
-      - name: contentReferenceKey
-        in: path
-        description: The unique reference key for the A+ Content document. A content
-          reference key cannot form a permalink and may change in the future. A content
-          reference key is not guaranteed to match any A+ content identifier.
-        required: true
-        schema:
-          minLength: 1
-          type: string
-      - name: marketplaceId
-        in: query
-        description: The identifier for the marketplace where the A+ Content is published.
-        required: true
-        schema:
-          minLength: 1
-          type: string
+        - name: contentReferenceKey
+          in: path
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
+          required: true
+          schema:
+            minLength: 1
+            type: string
+        - name: marketplaceId
+          in: query
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
+          required: true
+          schema:
+            minLength: 1
+            type: string
       responses:
-        200:
+        '200':
           description: Success.
           headers:
             x-amzn-RequestId:
@@ -1710,8 +1992,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostContentDocumentSuspendSubmissionResponse'
-        400:
+                $ref: >-
+                  #/components/schemas/PostContentDocumentSuspendSubmissionResponse
+        '400':
           description: Request has missing or invalid parameters and cannot be parsed.
           headers:
             x-amzn-RequestId:
@@ -1726,27 +2009,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        401:
-          description: The request's Authorization header is not formatted correctly
-            or does not contain a valid token.
+        '401':
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        403:
-          description: Indicates that access to the resource is forbidden. Possible
-            reasons include Access Denied, Unauthorized, Expired Token, or Invalid
+        '403':
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
             Signature.
           headers:
             x-amzn-RequestId:
@@ -1757,7 +2044,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        404:
+        '404':
           description: The specified resource does not exist.
           headers:
             x-amzn-RequestId:
@@ -1772,7 +2059,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        410:
+        '410':
           description: The specified resource no longer exists.
           headers:
             x-amzn-RequestId:
@@ -1780,16 +2067,18 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        429:
+        '429':
           description: The frequency of requests was greater than allowed.
           headers:
             x-amzn-RequestId:
@@ -1797,34 +2086,39 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        500:
-          description: An unexpected condition occurred that prevented the server
-            from fulfilling the request.
+        '500':
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           headers:
             x-amzn-RequestId:
               description: Unique request reference identifier.
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-        503:
+        '503':
           description: Temporary overloading or maintenance of the server.
           headers:
             x-amzn-RequestId:
@@ -1832,9 +2126,11 @@ paths:
               schema:
                 type: string
             x-amzn-RateLimit-Limit:
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
               schema:
                 type: string
           content:
@@ -1848,22 +2144,24 @@ components:
       properties:
         warnings:
           $ref: '#/components/schemas/MessageSet'
-      description: The base response data for all A+ Content operations when a request
-        is successful or partially successful. Individual operations may extend this
-        with additional data.
+      description: >-
+        The base response data for all A+ Content operations when a request is
+        successful or partially successful. Individual operations may extend
+        this with additional data.
     AplusPaginatedResponse:
-      description: The base response data for paginated A+ Content operations. Individual
-        operations may extend this with additional data. If nextPageToken is not returned,
-        there are no more pages to return.
+      description: >-
+        The base response data for paginated A+ Content operations. Individual
+        operations may extend this with additional data. If nextPageToken is not
+        returned, there are no more pages to return.
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
-      - type: object
-        properties:
-          nextPageToken:
-            $ref: '#/components/schemas/PageToken'
+        - $ref: '#/components/schemas/AplusResponse'
+        - type: object
+          properties:
+            nextPageToken:
+              $ref: '#/components/schemas/PageToken'
     ErrorList:
       required:
-      - errors
+        - errors
       type: object
       properties:
         errors:
@@ -1879,8 +2177,8 @@ components:
         $ref: '#/components/schemas/Error'
     Error:
       required:
-      - code
-      - message
+        - code
+        - message
       type: object
       properties:
         code:
@@ -1894,7 +2192,8 @@ components:
         details:
           minLength: 1
           type: string
-          description: Additional information, if available, to clarify the error
+          description: >-
+            Additional information, if available, to clarify the error
             condition.
       description: Error response returned when the request is unsuccessful.
     ContentMetadataRecordList:
@@ -1904,23 +2203,24 @@ components:
         $ref: '#/components/schemas/ContentMetadataRecord'
     ContentMetadataRecord:
       required:
-      - contentMetadata
-      - contentReferenceKey
+        - contentMetadata
+        - contentReferenceKey
       type: object
       properties:
         contentReferenceKey:
           $ref: '#/components/schemas/ContentReferenceKey'
         contentMetadata:
           $ref: '#/components/schemas/ContentMetadata'
-      description: The metadata for an A+ Content document, with additional information
-        for content management.
+      description: >-
+        The metadata for an A+ Content document, with additional information for
+        content management.
     ContentMetadata:
       required:
-      - badgeSet
-      - marketplaceId
-      - name
-      - status
-      - updateTime
+        - badgeSet
+        - marketplaceId
+        - name
+        - status
+        - updateTime
       type: object
       properties:
         name:
@@ -1943,40 +2243,45 @@ components:
       type: string
       description: The A+ Content document type.
       enum:
-      - EBC
-      - EMC
+        - EBC
+        - EMC
       x-docgen-enum-table-extension:
-      - value: EBC
-        description: A+ Content published through the A+ Content Manager in Seller
-          Central.
-      - value: EMC
-        description: A+ Content published through the A+ Content Manager in Vendor
-          Central.
+        - value: EBC
+          description: >-
+            A+ Content published through the A+ Content Manager in Seller
+            Central.
+        - value: EMC
+          description: >-
+            A+ Content published through the A+ Content Manager in Vendor
+            Central.
     ContentSubType:
       minLength: 1
       type: string
-      description: The A+ Content document subtype. This represents a special-purpose
-        type of an A+ Content document. Not every A+ Content document type will have
+      description: >-
+        The A+ Content document subtype. This represents a special-purpose type
+        of an A+ Content document. Not every A+ Content document type will have
         a subtype, and subtypes may change at any time.
     ContentStatus:
       type: string
       description: The submission status of the content document.
       enum:
-      - APPROVED
-      - DRAFT
-      - REJECTED
-      - SUBMITTED
+        - APPROVED
+        - DRAFT
+        - REJECTED
+        - SUBMITTED
       x-docgen-enum-table-extension:
-      - value: APPROVED
-        description: The content is approved and will be published to applied ASINs.
-      - value: DRAFT
-        description: The content has not yet been submitted for approval.
-      - value: REJECTED
-        description: The content has been rejected in moderation and needs to be revised
-          and resubmitted based on the rejection reasons provided.
-      - value: SUBMITTED
-        description: The content has been submitted for approval and is currently
-          waiting for moderation.
+        - value: APPROVED
+          description: The content is approved and will be published to applied ASINs.
+        - value: DRAFT
+          description: The content has not yet been submitted for approval.
+        - value: REJECTED
+          description: >-
+            The content has been rejected in moderation and needs to be revised
+            and resubmitted based on the rejection reasons provided.
+        - value: SUBMITTED
+          description: >-
+            The content has been submitted for approval and is currently waiting
+            for moderation.
     ContentBadgeSet:
       type: array
       description: The set of content badges.
@@ -1984,26 +2289,28 @@ components:
         $ref: '#/components/schemas/ContentBadge'
     ContentBadge:
       type: string
-      description: A flag that provides additional information about an A+ Content
+      description: >-
+        A flag that provides additional information about an A+ Content
         document.
       enum:
-      - BULK
-      - GENERATED
-      - LAUNCHPAD
-      - PREMIUM
-      - STANDARD
+        - BULK
+        - GENERATED
+        - LAUNCHPAD
+        - PREMIUM
+        - STANDARD
       x-docgen-enum-table-extension:
-      - value: BULK
-        description: This content is applied to ASINs in bulk.
-      - value: GENERATED
-        description: This content is generated by an automated process. If any user
-          modifies this content, it will lose the GENERATED badge.
-      - value: LAUNCHPAD
-        description: Launchpad content.
-      - value: PREMIUM
-        description: Premium content
-      - value: STANDARD
-        description: Standard content.
+        - value: BULK
+          description: This content is applied to ASINs in bulk.
+        - value: GENERATED
+          description: >-
+            This content is generated by an automated process. If any user
+            modifies this content, it will lose the GENERATED badge.
+        - value: LAUNCHPAD
+          description: Launchpad content.
+        - value: PREMIUM
+          description: Premium content
+        - value: STANDARD
+          description: Standard content.
     AsinBadgeSet:
       type: array
       description: The set of ASIN badges.
@@ -2011,29 +2318,34 @@ components:
         $ref: '#/components/schemas/AsinBadge'
     AsinBadge:
       type: string
-      description: A flag that provides additional information about an ASIN. This
-        is contextual and may change depending on the request that generated it.
+      description: >-
+        A flag that provides additional information about an ASIN. This is
+        contextual and may change depending on the request that generated it.
       enum:
-      - BRAND_NOT_ELIGIBLE
-      - CATALOG_NOT_FOUND
-      - CONTENT_NOT_PUBLISHED
-      - CONTENT_PUBLISHED
+        - BRAND_NOT_ELIGIBLE
+        - CATALOG_NOT_FOUND
+        - CONTENT_NOT_PUBLISHED
+        - CONTENT_PUBLISHED
       x-docgen-enum-table-extension:
-      - value: BRAND_NOT_ELIGIBLE
-        description: This ASIN is not part of the current user's brand. If the current
-          user corrects their brand registration to include this ASIN, it will lose
-          the `BrandNotEligible` badge.
-      - value: CATALOG_NOT_FOUND
-        description: This ASIN was not found in the Amazon catalog. If any user creates
-          or restores this ASIN, it will lose the `CatalogNotFound` badge.
-      - value: CONTENT_NOT_PUBLISHED
-        description: This ASIN does not have the specified A+ Content published to
-          it. If the current user publishes the specified content for this ASIN, it
-          will lose the `ContentNotPublished` badge.
-      - value: CONTENT_PUBLISHED
-        description: This ASIN has the specified A+ Content published to it. If the
-          current user suspends the specified content for this ASIN, it will lose
-          the `ContentPublished` badge.
+        - value: BRAND_NOT_ELIGIBLE
+          description: >-
+            This ASIN is not part of the current user's brand. If the current
+            user corrects their brand registration to include this ASIN, it will
+            lose the `BrandNotEligible` badge.
+        - value: CATALOG_NOT_FOUND
+          description: >-
+            This ASIN was not found in the Amazon catalog. If any user creates
+            or restores this ASIN, it will lose the `CatalogNotFound` badge.
+        - value: CONTENT_NOT_PUBLISHED
+          description: >-
+            This ASIN does not have the specified A+ Content published to it. If
+            the current user publishes the specified content for this ASIN, it
+            will lose the `ContentNotPublished` badge.
+        - value: CONTENT_PUBLISHED
+          description: >-
+            This ASIN has the specified A+ Content published to it. If the
+            current user suspends the specified content for this ASIN, it will
+            lose the `ContentPublished` badge.
     MarketplaceId:
       minLength: 1
       type: string
@@ -2041,8 +2353,12 @@ components:
     LanguageTag:
       minLength: 5
       type: string
-      description: |-
-        The IETF language tag. This only supports the primary language subtag with one secondary language subtag. The secondary language subtag is almost always a regional designation. This does not support additional subtags beyond the primary and secondary subtags.
+      description: >-
+        The IETF language tag. This only supports the primary language subtag
+        with one secondary language subtag. The secondary language subtag is
+        almost always a regional designation. This does not support additional
+        subtags beyond the primary and secondary subtags.
+
         **Pattern:** ^[a-z]{2,}-[A-Z0-9]{2,}$
     AsinSet:
       type: array
@@ -2060,7 +2376,7 @@ components:
         $ref: '#/components/schemas/AsinMetadata'
     AsinMetadata:
       required:
-      - asin
+        - asin
       type: object
       properties:
         asin:
@@ -2079,9 +2395,11 @@ components:
           description: The default image for the ASIN in the Amazon catalog.
         contentReferenceKeySet:
           $ref: '#/components/schemas/ContentReferenceKeySet'
-      description: The A+ Content ASIN with additional metadata for content management.
-        If you don't include the `includedDataSet` parameter in a call to the listContentDocumentAsinRelations
-        operation, the related ASINs are returned without metadata.
+      description: >-
+        The A+ Content ASIN with additional metadata for content management. If
+        you don't include the `includedDataSet` parameter in a call to the
+        listContentDocumentAsinRelations operation, the related ASINs are
+        returned without metadata.
     PublishRecordList:
       type: array
       description: A list of A+ Content publishing records.
@@ -2089,11 +2407,11 @@ components:
         $ref: '#/components/schemas/PublishRecord'
     PublishRecord:
       required:
-      - asin
-      - contentReferenceKey
-      - contentType
-      - locale
-      - marketplaceId
+        - asin
+        - contentReferenceKey
+        - contentType
+        - locale
+        - marketplaceId
       type: object
       properties:
         marketplaceId:
@@ -2117,58 +2435,63 @@ components:
     ContentReferenceKey:
       minLength: 1
       type: string
-      description: A unique reference key for the A+ Content document. A content reference
-        key cannot form a permalink and may change in the future. A content reference
-        key is not guaranteed to match any A+ content identifier.
+      description: >-
+        A unique reference key for the A+ Content document. A content reference
+        key cannot form a permalink and may change in the future. A content
+        reference key is not guaranteed to match any A+ content identifier.
     PageToken:
       minLength: 1
       type: string
-      description: A page token that is returned when the results of the call exceed
-        the page size. To get another page of results, call the operation again, passing
-        in this value with the pageToken parameter.
+      description: >-
+        A page token that is returned when the results of the call exceed the
+        page size. To get another page of results, call the operation again,
+        passing in this value with the pageToken parameter.
     ImageCropSpecification:
       required:
-      - size
+        - size
       type: object
       properties:
         size:
           $ref: '#/components/schemas/ImageDimensions'
         offset:
           $ref: '#/components/schemas/ImageOffsets'
-      description: The instructions for optionally cropping an image. If no cropping
-        is desired, set the dimensions to the original image size. If the image is
-        cropped and no offset values are provided, then the coordinates of the top
-        left corner of the cropped image, relative to the original image, are defaulted
-        to (0,0).
+      description: >-
+        The instructions for optionally cropping an image. If no cropping is
+        desired, set the dimensions to the original image size. If the image is
+        cropped and no offset values are provided, then the coordinates of the
+        top left corner of the cropped image, relative to the original image,
+        are defaulted to (0,0).
     ImageDimensions:
       required:
-      - height
-      - width
+        - height
+        - width
       type: object
       properties:
         width:
           $ref: '#/components/schemas/IntegerWithUnits'
         height:
           $ref: '#/components/schemas/IntegerWithUnits'
-      description: The dimensions extending from the top left corner of the cropped
-        image, or the top left corner of the original image if there is no cropping.
+      description: >-
+        The dimensions extending from the top left corner of the cropped image,
+        or the top left corner of the original image if there is no cropping.
         Only `pixels` is allowed as the units value for ImageDimensions.
     ImageOffsets:
       required:
-      - x
-      - y
+        - x
+        - 'y'
       type: object
       properties:
         x:
           $ref: '#/components/schemas/IntegerWithUnits'
-        y:
+        'y':
           $ref: '#/components/schemas/IntegerWithUnits'
-      description: The top left corner of the cropped image, specified in the original
+      description: >-
+        The top left corner of the cropped image, specified in the original
         image's coordinate space.
     IntegerWithUnits:
       required:
-      - units
-      - value
+        - units
+        - value
       type: object
       properties:
         value:
@@ -2177,11 +2500,12 @@ components:
         units:
           type: string
           description: The unit of measurement.
-      description: A whole number dimension and its unit of measurement. For example,
-        this can represent 100 pixels.
+      description: >-
+        A whole number dimension and its unit of measurement. For example, this
+        can represent 100 pixels.
     ContentRecord:
       required:
-      - contentReferenceKey
+        - contentReferenceKey
       type: object
       properties:
         contentReferenceKey:
@@ -2193,10 +2517,10 @@ components:
       description: A content document with additional information for content management.
     ContentDocument:
       required:
-      - contentModuleList
-      - contentType
-      - locale
-      - name
+        - contentModuleList
+        - contentType
+        - locale
+        - name
       type: object
       properties:
         name:
@@ -2212,7 +2536,8 @@ components:
           $ref: '#/components/schemas/LanguageTag'
         contentModuleList:
           $ref: '#/components/schemas/ContentModuleList'
-      description: The A+ Content document. This is the enhanced content that is published
+      description: >-
+        The A+ Content document. This is the enhanced content that is published
         to product detail pages.
     ContentModuleList:
       maxItems: 100
@@ -2223,7 +2548,7 @@ components:
         $ref: '#/components/schemas/ContentModule'
     ContentModule:
       required:
-      - contentModuleType
+        - contentModuleType
       type: object
       properties:
         contentModuleType:
@@ -2258,65 +2583,71 @@ components:
           $ref: '#/components/schemas/StandardTextModule'
         standardThreeImageText:
           $ref: '#/components/schemas/StandardThreeImageTextModule'
-      description: An A+ Content module. An A+ Content document is composed of content
-        modules. The contentModuleType property selects which content module types
-        to use.
+      description: >-
+        An A+ Content module. An A+ Content document is composed of content
+        modules. The contentModuleType property selects which content module
+        types to use.
     ContentModuleType:
       type: string
       description: The type of A+ Content module.
       enum:
-      - STANDARD_COMPANY_LOGO
-      - STANDARD_COMPARISON_TABLE
-      - STANDARD_FOUR_IMAGE_TEXT
-      - STANDARD_FOUR_IMAGE_TEXT_QUADRANT
-      - STANDARD_HEADER_IMAGE_TEXT
-      - STANDARD_IMAGE_SIDEBAR
-      - STANDARD_IMAGE_TEXT_OVERLAY
-      - STANDARD_MULTIPLE_IMAGE_TEXT
-      - STANDARD_PRODUCT_DESCRIPTION
-      - STANDARD_SINGLE_IMAGE_HIGHLIGHTS
-      - STANDARD_SINGLE_IMAGE_SPECS_DETAIL
-      - STANDARD_SINGLE_SIDE_IMAGE
-      - STANDARD_TECH_SPECS
-      - STANDARD_TEXT
-      - STANDARD_THREE_IMAGE_TEXT
+        - STANDARD_COMPANY_LOGO
+        - STANDARD_COMPARISON_TABLE
+        - STANDARD_FOUR_IMAGE_TEXT
+        - STANDARD_FOUR_IMAGE_TEXT_QUADRANT
+        - STANDARD_HEADER_IMAGE_TEXT
+        - STANDARD_IMAGE_SIDEBAR
+        - STANDARD_IMAGE_TEXT_OVERLAY
+        - STANDARD_MULTIPLE_IMAGE_TEXT
+        - STANDARD_PRODUCT_DESCRIPTION
+        - STANDARD_SINGLE_IMAGE_HIGHLIGHTS
+        - STANDARD_SINGLE_IMAGE_SPECS_DETAIL
+        - STANDARD_SINGLE_SIDE_IMAGE
+        - STANDARD_TECH_SPECS
+        - STANDARD_TEXT
+        - STANDARD_THREE_IMAGE_TEXT
       x-docgen-enum-table-extension:
-      - value: STANDARD_COMPANY_LOGO
-        description: The standard company logo image.
-      - value: STANDARD_COMPARISON_TABLE
-        description: The standard product comparison table or chart.
-      - value: STANDARD_FOUR_IMAGE_TEXT
-        description: Four standard images with text, presented across a single row.
-      - value: STANDARD_FOUR_IMAGE_TEXT_QUADRANT
-        description: Four standard images with text, presented on a grid of four quadrants.
-      - value: STANDARD_HEADER_IMAGE_TEXT
-        description: Standard headline text, an image, and body text.
-      - value: STANDARD_IMAGE_SIDEBAR
-        description: Two images, two paragraphs, and two bulleted lists. One image
-          is smaller and is displayed in the sidebar.
-      - value: STANDARD_IMAGE_TEXT_OVERLAY
-        description: A standard background image with a floating text box.
-      - value: STANDARD_MULTIPLE_IMAGE_TEXT
-        description: Standard images with text, presented one at a time. The user
-          clicks on thumbnails to view each block.
-      - value: STANDARD_PRODUCT_DESCRIPTION
-        description: Standard product description text.
-      - value: STANDARD_SINGLE_IMAGE_HIGHLIGHTS
-        description: A standard image with several paragraphs and a bulleted list.
-      - value: STANDARD_SINGLE_IMAGE_SPECS_DETAIL
-        description: A standard image with paragraphs and a bulleted list, and extra
-          space for technical details.
-      - value: STANDARD_SINGLE_SIDE_IMAGE
-        description: A standard headline and body text with an image on the side.
-      - value: STANDARD_TECH_SPECS
-        description: The standard table of technical feature names and definitions.
-      - value: STANDARD_TEXT
-        description: Standard headline and body text.
-      - value: STANDARD_THREE_IMAGE_TEXT
-        description: Three standard images with text, presented across one row.
+        - value: STANDARD_COMPANY_LOGO
+          description: The standard company logo image.
+        - value: STANDARD_COMPARISON_TABLE
+          description: The standard product comparison table or chart.
+        - value: STANDARD_FOUR_IMAGE_TEXT
+          description: Four standard images with text, presented across a single row.
+        - value: STANDARD_FOUR_IMAGE_TEXT_QUADRANT
+          description: >-
+            Four standard images with text, presented on a grid of four
+            quadrants.
+        - value: STANDARD_HEADER_IMAGE_TEXT
+          description: Standard headline text, an image, and body text.
+        - value: STANDARD_IMAGE_SIDEBAR
+          description: >-
+            Two images, two paragraphs, and two bulleted lists. One image is
+            smaller and is displayed in the sidebar.
+        - value: STANDARD_IMAGE_TEXT_OVERLAY
+          description: A standard background image with a floating text box.
+        - value: STANDARD_MULTIPLE_IMAGE_TEXT
+          description: >-
+            Standard images with text, presented one at a time. The user clicks
+            on thumbnails to view each block.
+        - value: STANDARD_PRODUCT_DESCRIPTION
+          description: Standard product description text.
+        - value: STANDARD_SINGLE_IMAGE_HIGHLIGHTS
+          description: A standard image with several paragraphs and a bulleted list.
+        - value: STANDARD_SINGLE_IMAGE_SPECS_DETAIL
+          description: >-
+            A standard image with paragraphs and a bulleted list, and extra
+            space for technical details.
+        - value: STANDARD_SINGLE_SIDE_IMAGE
+          description: A standard headline and body text with an image on the side.
+        - value: STANDARD_TECH_SPECS
+          description: The standard table of technical feature names and definitions.
+        - value: STANDARD_TEXT
+          description: Standard headline and body text.
+        - value: STANDARD_THREE_IMAGE_TEXT
+          description: Three standard images with text, presented across one row.
     StandardCompanyLogoModule:
       required:
-      - companyLogo
+        - companyLogo
       type: object
       properties:
         companyLogo:
@@ -2354,10 +2685,10 @@ components:
       description: Four standard images with text, presented across a single row.
     StandardFourImageTextQuadrantModule:
       required:
-      - block1
-      - block2
-      - block3
-      - block4
+        - block1
+        - block2
+        - block3
+        - block4
       type: object
       properties:
         block1:
@@ -2392,11 +2723,12 @@ components:
           $ref: '#/components/schemas/StandardImageTextBlock'
         sidebarListBlock:
           $ref: '#/components/schemas/StandardTextListBlock'
-      description: Two images, two paragraphs, and two bulleted lists. One image is
-        smaller and displayed in the sidebar.
+      description: >-
+        Two images, two paragraphs, and two bulleted lists. One image is smaller
+        and displayed in the sidebar.
     StandardImageTextOverlayModule:
       required:
-      - overlayColorType
+        - overlayColorType
       type: object
       properties:
         overlayColorType:
@@ -2411,11 +2743,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StandardImageTextCaptionBlock'
-      description: Standard images with text, presented one at a time. The user clicks
-        on thumbnails to view each block.
+      description: >-
+        Standard images with text, presented one at a time. The user clicks on
+        thumbnails to view each block.
     StandardProductDescriptionModule:
       required:
-      - body
+        - body
       type: object
       properties:
         body:
@@ -2456,11 +2789,12 @@ components:
           $ref: '#/components/schemas/StandardHeaderTextListBlock'
         specificationTextBlock:
           $ref: '#/components/schemas/StandardTextBlock'
-      description: A standard image with paragraphs and a bulleted list, and extra
-        space for technical details.
+      description: >-
+        A standard image with paragraphs and a bulleted list, and extra space
+        for technical details.
     StandardSingleSideImageModule:
       required:
-      - imagePositionType
+        - imagePositionType
       type: object
       properties:
         imagePositionType:
@@ -2470,7 +2804,7 @@ components:
       description: A standard headline and body text with an image on the side.
     StandardTechSpecsModule:
       required:
-      - specificationList
+        - specificationList
       type: object
       properties:
         headline:
@@ -2486,12 +2820,13 @@ components:
           maximum: 2
           minimum: 1
           type: integer
-          description: The number of tables to present. Features are evenly divided
-            between the tables.
+          description: >-
+            The number of tables to present. Features are evenly divided between
+            the tables.
       description: The standard table of technical feature names and definitions.
     StandardTextModule:
       required:
-      - body
+        - body
       type: object
       properties:
         headline:
@@ -2513,16 +2848,17 @@ components:
       description: Three standard images with text, presented across a single row.
     StandardComparisonProductBlock:
       required:
-      - position
+        - position
       type: object
       properties:
         position:
           maximum: 6
           minimum: 1
           type: integer
-          description: The rank or index of this comparison product block within the
-            module. Different blocks cannot occupy the same position within a single
-            module.
+          description: >-
+            The rank or index of this comparison product block within the
+            module. Different blocks cannot occupy the same position within a
+            single module.
         image:
           $ref: '#/components/schemas/ImageComponent'
         title:
@@ -2553,7 +2889,7 @@ components:
       description: The A+ standard fixed-length list of text, with a related headline.
     StandardTextListBlock:
       required:
-      - textList
+        - textList
       type: object
       properties:
         textList:
@@ -2562,8 +2898,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextItem'
-      description: The A+ Content standard fixed length list of text, usually presented
-        as bullet points.
+      description: >-
+        The A+ Content standard fixed length list of text, usually presented as
+        bullet points.
     StandardImageTextCaptionBlock:
       type: object
       properties:
@@ -2571,7 +2908,8 @@ components:
           $ref: '#/components/schemas/StandardImageTextBlock'
         caption:
           $ref: '#/components/schemas/TextComponent'
-      description: The A+ Content standard image and text block, with a related caption.
+      description: >-
+        The A+ Content standard image and text block, with a related caption.
         The caption may not display on all devices.
     StandardImageCaptionBlock:
       type: object
@@ -2598,8 +2936,9 @@ components:
           $ref: '#/components/schemas/TextComponent'
         body:
           $ref: '#/components/schemas/ParagraphComponent'
-      description: The A+ Content standard text box block, comprised of a paragraph
-        with a headline.
+      description: >-
+        The A+ Content standard text box block, comprised of a paragraph with a
+        headline.
     StandardTextPairBlock:
       type: object
       properties:
@@ -2607,55 +2946,59 @@ components:
           $ref: '#/components/schemas/TextComponent'
         description:
           $ref: '#/components/schemas/TextComponent'
-      description: The A+ Content standard label and description block, comprised
-        of a pair of text components.
+      description: >-
+        The A+ Content standard label and description block, comprised of a pair
+        of text components.
     TextItem:
       required:
-      - position
-      - text
+        - position
+        - text
       type: object
       properties:
         position:
-          maximum: 1E+2
+          maximum: 100
           minimum: 1
           type: integer
-          description: The rank or index of this text item within the collection.
-            Different items cannot occupy the same position within a single collection.
+          description: >-
+            The rank or index of this text item within the collection. Different
+            items cannot occupy the same position within a single collection.
         text:
           $ref: '#/components/schemas/TextComponent'
-      description: Rich positional text, usually presented as a collection of bullet
+      description: >-
+        Rich positional text, usually presented as a collection of bullet
         points.
     PlainTextItem:
       required:
-      - position
-      - value
+        - position
+        - value
       type: object
       properties:
         position:
-          maximum: 1E+2
+          maximum: 100
           minimum: 1
           type: integer
-          description: The rank or index of this text item within the collection.
-            Different items cannot occupy the same position within a single collection.
+          description: >-
+            The rank or index of this text item within the collection. Different
+            items cannot occupy the same position within a single collection.
         value:
           maxLength: 250
           minLength: 1
           type: string
           description: The actual plain text.
-      description: Plain positional text, used in collections of brief labels and
+      description: >-
+        Plain positional text, used in collections of brief labels and
         descriptors.
     ImageComponent:
       required:
-      - altText
-      - imageCropSpecification
-      - uploadDestinationId
+        - altText
+        - imageCropSpecification
+        - uploadDestinationId
       type: object
       properties:
         uploadDestinationId:
           minLength: 1
           type: string
-          description: This identifier is provided by the Selling Partner API for
-            Uploads.
+          description: This identifier is provided by the Selling Partner API for Uploads.
         imageCropSpecification:
           $ref: '#/components/schemas/ImageCropSpecification'
         altText:
@@ -2666,7 +3009,7 @@ components:
       description: A reference to an image, hosted in the A+ Content media library.
     ParagraphComponent:
       required:
-      - textList
+        - textList
       type: object
       properties:
         textList:
@@ -2678,7 +3021,7 @@ components:
       description: A list of rich text content, usually presented in a text box.
     TextComponent:
       required:
-      - value
+        - value
       type: object
       properties:
         value:
@@ -2693,27 +3036,28 @@ components:
       type: string
       description: The relative color scheme of content.
       enum:
-      - DARK
-      - LIGHT
+        - DARK
+        - LIGHT
       x-docgen-enum-table-extension:
-      - value: DARK
-        description: Dark grey, semi-opaque shaded background for light text overlay
-          box.
-      - value: LIGHT
-        description: White, semi-opaque shaded background for dark text overlay box.
+        - value: DARK
+          description: Dark grey, semi-opaque shaded background for light text overlay box.
+        - value: LIGHT
+          description: White, semi-opaque shaded background for dark text overlay box.
     PositionType:
       type: string
       description: The relative positioning of content.
       enum:
-      - LEFT
-      - RIGHT
+        - LEFT
+        - RIGHT
       x-docgen-enum-table-extension:
-      - value: LEFT
-        description: Indicates that the content is to be positioned on the left side
-          of the module.
-      - value: RIGHT
-        description: Indicates that the content is to be positioned on the right side
-          of the module.
+        - value: LEFT
+          description: >-
+            Indicates that the content is to be positioned on the left side of
+            the module.
+        - value: RIGHT
+          description: >-
+            Indicates that the content is to be positioned on the right side of
+            the module.
     DecoratorSet:
       type: array
       description: A set of content decorators.
@@ -2725,134 +3069,143 @@ components:
         type:
           $ref: '#/components/schemas/DecoratorType'
         offset:
-          maximum: 1E+4
+          maximum: 10000
           minimum: 0
           type: integer
-          description: The starting character of this decorator within the content
-            string. Use zero for the first character.
+          description: >-
+            The starting character of this decorator within the content string.
+            Use zero for the first character.
         length:
-          maximum: 1E+4
+          maximum: 10000
           minimum: 0
           type: integer
-          description: The number of content characters to alter with this decorator.
-            Decorators such as line breaks can have zero length and fit between characters.
+          description: >-
+            The number of content characters to alter with this decorator.
+            Decorators such as line breaks can have zero length and fit between
+            characters.
         depth:
-          maximum: 1E+2
+          maximum: 100
           minimum: 0
           type: integer
-          description: The relative intensity or variation of this decorator. Decorators
-            such as bullet-points, for example, can have multiple indentation depths.
-      description: A decorator applied to a content string value in order to create
-        rich text.
+          description: >-
+            The relative intensity or variation of this decorator. Decorators
+            such as bullet-points, for example, can have multiple indentation
+            depths.
+      description: >-
+        A decorator applied to a content string value in order to create rich
+        text.
     DecoratorType:
       type: string
       description: The type of rich text decorator.
       enum:
-      - LIST_ITEM
-      - LIST_ORDERED
-      - LIST_UNORDERED
-      - STYLE_BOLD
-      - STYLE_ITALIC
-      - STYLE_LINEBREAK
-      - STYLE_PARAGRAPH
-      - STYLE_UNDERLINE
+        - LIST_ITEM
+        - LIST_ORDERED
+        - LIST_UNORDERED
+        - STYLE_BOLD
+        - STYLE_ITALIC
+        - STYLE_LINEBREAK
+        - STYLE_PARAGRAPH
+        - STYLE_UNDERLINE
       x-docgen-enum-table-extension:
-      - value: LIST_ITEM
-        description: Formatted list item, used in either numbered or bulleted lists,
-          inside the list enclosure.
-      - value: LIST_ORDERED
-        description: Numbered list enclosure.
-      - value: LIST_UNORDERED
-        description: Bulleted list enclosure.
-      - value: STYLE_BOLD
-        description: Bold text formatting.
-      - value: STYLE_ITALIC
-        description: Italic text formatting.
-      - value: STYLE_LINEBREAK
-        description: New line of text.
-      - value: STYLE_PARAGRAPH
-        description: Paragraph text formatting.
-      - value: STYLE_UNDERLINE
-        description: Underline text formatting.
+        - value: LIST_ITEM
+          description: >-
+            Formatted list item, used in either numbered or bulleted lists,
+            inside the list enclosure.
+        - value: LIST_ORDERED
+          description: Numbered list enclosure.
+        - value: LIST_UNORDERED
+          description: Bulleted list enclosure.
+        - value: STYLE_BOLD
+          description: Bold text formatting.
+        - value: STYLE_ITALIC
+          description: Italic text formatting.
+        - value: STYLE_LINEBREAK
+          description: New line of text.
+        - value: STYLE_PARAGRAPH
+          description: Paragraph text formatting.
+        - value: STYLE_UNDERLINE
+          description: Underline text formatting.
     SearchContentDocumentsResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusPaginatedResponse'
-      - required:
-        - contentMetadataRecords
-        type: object
-        properties:
-          contentMetadataRecords:
-            $ref: '#/components/schemas/ContentMetadataRecordList'
+        - $ref: '#/components/schemas/AplusPaginatedResponse'
+        - required:
+            - contentMetadataRecords
+          type: object
+          properties:
+            contentMetadataRecords:
+              $ref: '#/components/schemas/ContentMetadataRecordList'
     GetContentDocumentResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
-      - required:
-        - contentRecord
-        type: object
-        properties:
-          contentRecord:
-            $ref: '#/components/schemas/ContentRecord'
+        - $ref: '#/components/schemas/AplusResponse'
+        - required:
+            - contentRecord
+          type: object
+          properties:
+            contentRecord:
+              $ref: '#/components/schemas/ContentRecord'
     PostContentDocumentRequest:
       required:
-      - contentDocument
+        - contentDocument
       type: object
       properties:
         contentDocument:
           $ref: '#/components/schemas/ContentDocument'
     PostContentDocumentResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
-      - required:
-        - contentReferenceKey
-        type: object
-        properties:
-          contentReferenceKey:
-            $ref: '#/components/schemas/ContentReferenceKey'
+        - $ref: '#/components/schemas/AplusResponse'
+        - required:
+            - contentReferenceKey
+          type: object
+          properties:
+            contentReferenceKey:
+              $ref: '#/components/schemas/ContentReferenceKey'
     ListContentDocumentAsinRelationsResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusPaginatedResponse'
-      - required:
-        - asinMetadataSet
-        type: object
-        properties:
-          asinMetadataSet:
-            $ref: '#/components/schemas/AsinMetadataSet'
+        - $ref: '#/components/schemas/AplusPaginatedResponse'
+        - required:
+            - asinMetadataSet
+          type: object
+          properties:
+            asinMetadataSet:
+              $ref: '#/components/schemas/AsinMetadataSet'
     PostContentDocumentAsinRelationsRequest:
       required:
-      - asinSet
+        - asinSet
       type: object
       properties:
         asinSet:
           $ref: '#/components/schemas/AsinSet'
     PostContentDocumentAsinRelationsResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
+        - $ref: '#/components/schemas/AplusResponse'
     ValidateContentDocumentAsinRelationsResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
-      - $ref: '#/components/schemas/ErrorList'
+        - $ref: '#/components/schemas/AplusResponse'
+        - $ref: '#/components/schemas/ErrorList'
     SearchContentPublishRecordsResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusPaginatedResponse'
-      - required:
-        - publishRecordList
-        type: object
-        properties:
-          publishRecordList:
-            $ref: '#/components/schemas/PublishRecordList'
+        - $ref: '#/components/schemas/AplusPaginatedResponse'
+        - required:
+            - publishRecordList
+          type: object
+          properties:
+            publishRecordList:
+              $ref: '#/components/schemas/PublishRecordList'
     PostContentDocumentApprovalSubmissionResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
+        - $ref: '#/components/schemas/AplusResponse'
     PostContentDocumentSuspendSubmissionResponse:
       allOf:
-      - $ref: '#/components/schemas/AplusResponse'
+        - $ref: '#/components/schemas/AplusResponse'
   parameters:
     contentReferenceKey:
       name: contentReferenceKey
       in: path
-      description: 'The unique reference key for the A+ Content document. A content
-        reference key cannot form a permalink and may change in the future. A content
-        reference key is not guaranteed to match any A+ content identifier.  '
+      description: >-
+        The unique reference key for the A+ Content document. A content
+        reference key cannot form a permalink and may change in the future. A
+        content reference key is not guaranteed to match any A+ content
+        identifier.  
       required: true
       schema:
         minLength: 1
@@ -2868,13 +3221,14 @@ components:
     pageToken:
       name: pageToken
       in: query
-      description: A page token from the nextPageToken response element returned by
-        your previous call to this operation. nextPageToken is returned when the results
-        of a call exceed the page size. To get the next page of results, call the
-        operation and include pageToken as the only parameter. Specifying pageToken
-        with any other parameter will cause the request to fail. When no nextPageToken
-        value is returned there are no more pages to return. A pageToken value is
-        not usable across different operations.
+      description: >-
+        A page token from the nextPageToken response element returned by your
+        previous call to this operation. nextPageToken is returned when the
+        results of a call exceed the page size. To get the next page of results,
+        call the operation and include pageToken as the only parameter.
+        Specifying pageToken with any other parameter will cause the request to
+        fail. When no nextPageToken value is returned there are no more pages to
+        return. A pageToken value is not usable across different operations.
       schema:
         minLength: 1
         type: string
@@ -2912,8 +3266,8 @@ components:
         items:
           type: string
           enum:
-          - CONTENTS
-          - METADATA
+            - CONTENTS
+            - METADATA
     listContentDocumentAsinRelationsIncludedDataSet:
       name: includedDataSet
       in: query
@@ -2927,4 +3281,4 @@ components:
         items:
           type: string
           enum:
-          - METADATA
+            - METADATA
