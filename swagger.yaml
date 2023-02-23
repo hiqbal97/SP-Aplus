@@ -1,7 +1,12 @@
 --
 swagger: '2.0'
 info:
-  description: With the A+ Content API, you can build applications that help selling partners add rich marketing content to their Amazon product detail pages. A+ content helps selling partners share their brand and product story, which helps buyers make informed purchasing decisions. Selling partners assemble content by choosing from content modules and adding images and text.
+  description: >-
+    With the A+ Content API, you can build applications that help selling
+    partners add rich marketing content to their Amazon product detail pages. A+
+    content helps selling partners share their brand and product story, which
+    helps buyers make informed purchasing decisions. Selling partners assemble
+    content by choosing from content modules and adding images and text.
   version: '2020-11-01'
   title: Selling Partner API for A+ Content Management
   contact:
@@ -22,27 +27,52 @@ paths:
     get:
       tags:
         - aplusContent
-      description: |-
-        Returns a list of all A+ Content documents assigned to a selling partner. This operation returns only the metadata of the A+ Content documents. Call the getContentDocument operation to get the actual contents of the A+ Content documents.
+      description: >-
+        Returns a list of all A+ Content documents assigned to a selling
+        partner. This operation returns only the metadata of the A+ Content
+        documents. Call the getContentDocument operation to get the actual
+        contents of the A+ Content documents.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: searchContentDocuments
       parameters:
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
         - name: pageToken
           in: query
-          description: A page token from the nextPageToken response element returned by your previous call to this operation. nextPageToken is returned when the results of a call exceed the page size. To get the next page of results, call the operation and include pageToken as the only parameter. Specifying pageToken with any other parameter will cause the request to fail. When no nextPageToken value is returned there are no more pages to return. A pageToken value is not usable across different operations.
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
           required: false
           type: string
           minLength: 1
@@ -70,20 +100,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -108,9 +145,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -121,22 +160,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -147,30 +192,46 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
     post:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Creates a new A+ Content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: createContentDocument
       parameters:
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -204,20 +265,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -242,22 +310,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -268,9 +342,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -279,27 +355,45 @@ paths:
     get:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Returns an A+ Content document, if available.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: getContentDocument
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ Content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -345,20 +439,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -383,9 +484,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -396,22 +499,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -422,36 +531,56 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
     post:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Updates an existing A+ Content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: updateContentDocument
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ Content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -485,20 +614,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -523,9 +659,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -536,22 +674,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -562,9 +706,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -573,33 +719,56 @@ paths:
     get:
       tags:
         - aplusContent
-      description: |-
-        Returns a list of ASINs related to the specified A+ Content document, if available. If you do not include the `asinSet` parameter, the operation returns all ASINs related to the content document.
+      description: >-
+        Returns a list of ASINs related to the specified A+ Content document, if
+        available. If you do not include the `asinSet` parameter, the operation
+        returns all ASINs related to the content document.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: listContentDocumentAsinRelations
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ Content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ Content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
         - name: includedDataSet
           in: query
-          description: The set of A+ Content data types to include in the response. If you do not include this parameter, the operation returns the related ASINs without metadata.
+          description: >-
+            The set of A+ Content data types to include in the response. If you
+            do not include this parameter, the operation returns the related
+            ASINs without metadata.
           required: false
           type: array
           items:
@@ -624,7 +793,15 @@ paths:
           uniqueItems: true
         - name: pageToken
           in: query
-          description: A page token from the nextPageToken response element returned by your previous call to this operation. nextPageToken is returned when the results of a call exceed the page size. To get the next page of results, call the operation and include pageToken as the only parameter. Specifying pageToken with any other parameter will cause the request to fail. When no nextPageToken value is returned there are no more pages to return. A pageToken value is not usable across different operations.
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
           required: false
           type: string
           minLength: 1
@@ -652,20 +829,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -690,9 +874,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -703,22 +889,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -729,36 +921,59 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
     post:
       tags:
         - aplusContent
-      description: |-
-        Replaces all ASINs related to the specified A+ Content document, if available. This may add or remove ASINs, depending on the current set of related ASINs. Removing an ASIN has the side effect of suspending the content document from that ASIN.
+      description: >-
+        Replaces all ASINs related to the specified A+ Content document, if
+        available. This may add or remove ASINs, depending on the current set of
+        related ASINs. Removing an ASIN has the side effect of suspending the
+        content document from that ASIN.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentAsinRelations
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -792,20 +1007,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -830,9 +1052,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -843,22 +1067,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -869,9 +1099,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -880,21 +1112,35 @@ paths:
     post:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Checks if the A+ Content document is valid for use on a set of ASINs.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: validateContentDocumentAsinRelations
       parameters:
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -938,20 +1184,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -976,22 +1229,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1002,9 +1261,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1013,21 +1274,35 @@ paths:
     get:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Searches for A+ Content publishing records, if available.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: searchContentPublishRecords
       parameters:
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -1039,7 +1314,15 @@ paths:
           minLength: 10
         - name: pageToken
           in: query
-          description: A page token from the nextPageToken response element returned by your previous call to this operation. nextPageToken is returned when the results of a call exceed the page size. To get the next page of results, call the operation and include pageToken as the only parameter. Specifying pageToken with any other parameter will cause the request to fail. When no nextPageToken value is returned there are no more pages to return. A pageToken value is not usable across different operations.
+          description: >-
+            A page token from the nextPageToken response element returned by
+            your previous call to this operation. nextPageToken is returned when
+            the results of a call exceed the page size. To get the next page of
+            results, call the operation and include pageToken as the only
+            parameter. Specifying pageToken with any other parameter will cause
+            the request to fail. When no nextPageToken value is returned there
+            are no more pages to return. A pageToken value is not usable across
+            different operations.
           required: false
           type: string
           minLength: 1
@@ -1067,20 +1350,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -1105,22 +1395,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1131,9 +1427,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1142,27 +1440,45 @@ paths:
     post:
       tags:
         - aplusContent
-      description: |-
+      description: >-
         Submits an A+ Content document for review, approval, and publishing.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentApprovalSubmission
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -1190,20 +1506,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -1228,9 +1551,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1241,22 +1566,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1267,9 +1598,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1278,27 +1611,46 @@ paths:
     post:
       tags:
         - aplusContent
-      description: |-
-        Submits a request to suspend visible A+ Content. This neither deletes the content document nor the ASIN relations.
+      description: >-
+        Submits a request to suspend visible A+ Content. This neither deletes
+        the content document nor the ASIN relations.
+
 
         **Usage Plan:**
 
+
         | Rate (requests per second) | Burst |
+
         | ---- | ---- |
+
         | 10 | 10 |
 
-        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate limits that were applied to the requested operation, when available. The table above indicates the default rate and burst values for this operation. Selling partners whose business demands require higher throughput may see higher rate and burst values than those shown here. For more information, see [Usage Plans and Rate Limits in the Selling Partner API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
+
+        The `x-amzn-RateLimit-Limit` response header returns the usage plan rate
+        limits that were applied to the requested operation, when available. The
+        table above indicates the default rate and burst values for this
+        operation. Selling partners whose business demands require higher
+        throughput may see higher rate and burst values than those shown here.
+        For more information, see [Usage Plans and Rate Limits in the Selling
+        Partner
+        API](https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits-in-the-sp-api).
       operationId: postContentDocumentSuspendSubmission
       parameters:
         - name: contentReferenceKey
           in: path
-          description: The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ content identifier.
+          description: >-
+            The unique reference key for the A+ Content document. A content
+            reference key cannot form a permalink and may change in the future.
+            A content reference key is not guaranteed to match any A+ content
+            identifier.
           required: true
           type: string
           minLength: 1
         - name: marketplaceId
           in: query
-          description: The identifier for the marketplace where the A+ Content is published.
+          description: >-
+            The identifier for the marketplace where the A+ Content is
+            published.
           required: true
           type: string
           minLength: 1
@@ -1326,20 +1678,27 @@ paths:
               type: string
               description: Unique request reference identifier.
         '401':
-          description: The request's Authorization header is not formatted correctly or does not contain a valid token.
+          description: >-
+            The request's Authorization header is not formatted correctly or
+            does not contain a valid token.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '403':
-          description: Indicates that access to the resource is forbidden. Possible reasons include Access Denied, Unauthorized, Expired Token, or Invalid Signature.
+          description: >-
+            Indicates that access to the resource is forbidden. Possible reasons
+            include Access Denied, Unauthorized, Expired Token, or Invalid
+            Signature.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
@@ -1364,9 +1723,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1377,22 +1738,28 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
         '500':
-          description: An unexpected condition occurred that prevented the server from fulfilling the request.
+          description: >-
+            An unexpected condition occurred that prevented the server from
+            fulfilling the request.
           schema:
             $ref: '#/definitions/ErrorList'
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1403,9 +1770,11 @@ paths:
           headers:
             x-amzn-RateLimit-Limit:
               type: string
-              description: |-
+              description: >-
                 Your rate limit (requests per second) for this operation.
-                _Note:_ For this status code, the rate limit header is deprecated and no longer returned.
+
+                _Note:_ For this status code, the rate limit header is
+                deprecated and no longer returned.
             x-amzn-RequestId:
               type: string
               description: Unique request reference identifier.
@@ -1416,7 +1785,10 @@ definitions:
     properties:
       warnings:
         $ref: '#/definitions/MessageSet'
-    description: The base response data for all A+ Content operations when a request is successful or partially successful. Individual operations may extend this with additional data.
+    description: >-
+      The base response data for all A+ Content operations when a request is
+      successful or partially successful. Individual operations may extend this
+      with additional data.
   AplusPaginatedResponse:
     allOf:
       - $ref: '#/definitions/AplusResponse'
@@ -1424,7 +1796,10 @@ definitions:
         properties:
           nextPageToken:
             $ref: '#/definitions/PageToken'
-    description: The base response data for paginated A+ Content operations. Individual operations may extend this with additional data. If nextPageToken is not returned, there are no more pages to return.
+    description: >-
+      The base response data for paginated A+ Content operations. Individual
+      operations may extend this with additional data. If nextPageToken is not
+      returned, there are no more pages to return.
   ErrorList:
     type: object
     required:
@@ -1477,7 +1852,9 @@ definitions:
         $ref: '#/definitions/ContentReferenceKey'
       contentMetadata:
         $ref: '#/definitions/ContentMetadata'
-    description: The metadata for an A+ Content document, with additional information for content management.
+    description: >-
+      The metadata for an A+ Content document, with additional information for
+      content management.
   ContentMetadata:
     type: object
     required:
@@ -1517,7 +1894,10 @@ definitions:
   ContentSubType:
     type: string
     minLength: 1
-    description: The A+ Content document subtype. This represents a special-purpose type of an A+ Content document. Not every A+ Content document type will have a subtype, and subtypes may change at any time.
+    description: >-
+      The A+ Content document subtype. This represents a special-purpose type of
+      an A+ Content document. Not every A+ Content document type will have a
+      subtype, and subtypes may change at any time.
   ContentStatus:
     type: string
     description: The submission status of the content document.
@@ -1532,9 +1912,13 @@ definitions:
       - value: DRAFT
         description: The content has not yet been submitted for approval.
       - value: REJECTED
-        description: The content has been rejected in moderation and needs to be revised and resubmitted based on the rejection reasons provided.
+        description: >-
+          The content has been rejected in moderation and needs to be revised
+          and resubmitted based on the rejection reasons provided.
       - value: SUBMITTED
-        description: The content has been submitted for approval and is currently waiting for moderation.
+        description: >-
+          The content has been submitted for approval and is currently waiting
+          for moderation.
   ContentBadgeSet:
     type: array
     description: The set of content badges.
@@ -1554,7 +1938,9 @@ definitions:
       - value: BULK
         description: This content is applied to ASINs in bulk.
       - value: GENERATED
-        description: This content is generated by an automated process. If any user modifies this content, it will lose the GENERATED badge.
+        description: >-
+          This content is generated by an automated process. If any user
+          modifies this content, it will lose the GENERATED badge.
       - value: LAUNCHPAD
         description: Launchpad content.
       - value: PREMIUM
@@ -1569,7 +1955,9 @@ definitions:
     uniqueItems: true
   AsinBadge:
     type: string
-    description: A flag that provides additional information about an ASIN. This is contextual and may change depending on the request that generated it.
+    description: >-
+      A flag that provides additional information about an ASIN. This is
+      contextual and may change depending on the request that generated it.
     enum:
       - BRAND_NOT_ELIGIBLE
       - CATALOG_NOT_FOUND
@@ -1577,13 +1965,24 @@ definitions:
       - CONTENT_PUBLISHED
     x-docgen-enum-table-extension:
       - value: BRAND_NOT_ELIGIBLE
-        description: This ASIN is not part of the current user's brand. If the current user corrects their brand registration to include this ASIN, it will lose the `BrandNotEligible` badge.
+        description: >-
+          This ASIN is not part of the current user's brand. If the current user
+          corrects their brand registration to include this ASIN, it will lose
+          the `BrandNotEligible` badge.
       - value: CATALOG_NOT_FOUND
-        description: This ASIN was not found in the Amazon catalog. If any user creates or restores this ASIN, it will lose the `CatalogNotFound` badge.
+        description: >-
+          This ASIN was not found in the Amazon catalog. If any user creates or
+          restores this ASIN, it will lose the `CatalogNotFound` badge.
       - value: CONTENT_NOT_PUBLISHED
-        description: This ASIN does not have the specified A+ Content published to it. If the current user publishes the specified content for this ASIN, it will lose the `ContentNotPublished` badge.
+        description: >-
+          This ASIN does not have the specified A+ Content published to it. If
+          the current user publishes the specified content for this ASIN, it
+          will lose the `ContentNotPublished` badge.
       - value: CONTENT_PUBLISHED
-        description: This ASIN has the specified A+ Content published to it. If the current user suspends the specified content for this ASIN, it will lose the `ContentPublished` badge.
+        description: >-
+          This ASIN has the specified A+ Content published to it. If the current
+          user suspends the specified content for this ASIN, it will lose the
+          `ContentPublished` badge.
   MarketplaceId:
     type: string
     minLength: 1
@@ -1591,8 +1990,12 @@ definitions:
   LanguageTag:
     type: string
     minLength: 5
-    description: |-
-      The IETF language tag. This only supports the primary language subtag with one secondary language subtag. The secondary language subtag is almost always a regional designation. This does not support additional subtags beyond the primary and secondary subtags.
+    description: >-
+      The IETF language tag. This only supports the primary language subtag with
+      one secondary language subtag. The secondary language subtag is almost
+      always a regional designation. This does not support additional subtags
+      beyond the primary and secondary subtags.
+
       **Pattern:** ^[a-z]{2,}-[A-Z0-9]{2,}$
   AsinSet:
     type: array
@@ -1631,7 +2034,11 @@ definitions:
         minLength: 1
       contentReferenceKeySet:
         $ref: '#/definitions/ContentReferenceKeySet'
-    description: The A+ Content ASIN with additional metadata for content management. If you don't include the `includedDataSet` parameter in a call to the listContentDocumentAsinRelations operation, the related ASINs are returned without metadata.
+    description: >-
+      The A+ Content ASIN with additional metadata for content management. If
+      you don't include the `includedDataSet` parameter in a call to the
+      listContentDocumentAsinRelations operation, the related ASINs are returned
+      without metadata.
   PublishRecordList:
     type: array
     description: A list of A+ Content publishing records.
@@ -1669,11 +2076,17 @@ definitions:
   ContentReferenceKey:
     type: string
     minLength: 1
-    description: A unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ content identifier.
+    description: >-
+      A unique reference key for the A+ Content document. A content reference
+      key cannot form a permalink and may change in the future. A content
+      reference key is not guaranteed to match any A+ content identifier.
   PageToken:
     type: string
     minLength: 1
-    description: A page token that is returned when the results of the call exceed the page size. To get another page of results, call the operation again, passing in this value with the pageToken parameter.
+    description: >-
+      A page token that is returned when the results of the call exceed the page
+      size. To get another page of results, call the operation again, passing in
+      this value with the pageToken parameter.
   ImageCropSpecification:
     type: object
     required:
@@ -1683,7 +2096,12 @@ definitions:
         $ref: '#/definitions/ImageDimensions'
       offset:
         $ref: '#/definitions/ImageOffsets'
-    description: The instructions for optionally cropping an image. If no cropping is desired, set the dimensions to the original image size. If the image is cropped and no offset values are provided, then the coordinates of the top left corner of the cropped image, relative to the original image, are defaulted to (0,0).
+    description: >-
+      The instructions for optionally cropping an image. If no cropping is
+      desired, set the dimensions to the original image size. If the image is
+      cropped and no offset values are provided, then the coordinates of the top
+      left corner of the cropped image, relative to the original image, are
+      defaulted to (0,0).
   ImageDimensions:
     type: object
     required:
@@ -1694,7 +2112,10 @@ definitions:
         $ref: '#/definitions/IntegerWithUnits'
       height:
         $ref: '#/definitions/IntegerWithUnits'
-    description: The dimensions extending from the top left corner of the cropped image, or the top left corner of the original image if there is no cropping. Only `pixels` is allowed as the units value for ImageDimensions.
+    description: >-
+      The dimensions extending from the top left corner of the cropped image, or
+      the top left corner of the original image if there is no cropping. Only
+      `pixels` is allowed as the units value for ImageDimensions.
   ImageOffsets:
     type: object
     required:
@@ -1705,7 +2126,9 @@ definitions:
         $ref: '#/definitions/IntegerWithUnits'
       'y':
         $ref: '#/definitions/IntegerWithUnits'
-    description: The top left corner of the cropped image, specified in the original image's coordinate space.
+    description: >-
+      The top left corner of the cropped image, specified in the original
+      image's coordinate space.
   IntegerWithUnits:
     type: object
     required:
@@ -1718,7 +2141,9 @@ definitions:
       units:
         type: string
         description: The unit of measurement.
-    description: A whole number dimension and its unit of measurement. For example, this can represent 100 pixels.
+    description: >-
+      A whole number dimension and its unit of measurement. For example, this
+      can represent 100 pixels.
   ContentRecord:
     type: object
     description: A content document with additional information for content management.
@@ -1752,7 +2177,9 @@ definitions:
         $ref: '#/definitions/LanguageTag'
       contentModuleList:
         $ref: '#/definitions/ContentModuleList'
-    description: The A+ Content document. This is the enhanced content that is published to product detail pages.
+    description: >-
+      The A+ Content document. This is the enhanced content that is published to
+      product detail pages.
   ContentModuleList:
     type: array
     description: A list of A+ Content modules.
@@ -1798,7 +2225,10 @@ definitions:
         $ref: '#/definitions/StandardTextModule'
       standardThreeImageText:
         $ref: '#/definitions/StandardThreeImageTextModule'
-    description: An A+ Content module. An A+ Content document is composed of content modules. The contentModuleType property selects which content module types to use.
+    description: >-
+      An A+ Content module. An A+ Content document is composed of content
+      modules. The contentModuleType property selects which content module types
+      to use.
   ContentModuleType:
     type: string
     description: The type of A+ Content module.
@@ -1830,17 +2260,23 @@ definitions:
       - value: STANDARD_HEADER_IMAGE_TEXT
         description: Standard headline text, an image, and body text.
       - value: STANDARD_IMAGE_SIDEBAR
-        description: Two images, two paragraphs, and two bulleted lists. One image is smaller and is displayed in the sidebar.
+        description: >-
+          Two images, two paragraphs, and two bulleted lists. One image is
+          smaller and is displayed in the sidebar.
       - value: STANDARD_IMAGE_TEXT_OVERLAY
         description: A standard background image with a floating text box.
       - value: STANDARD_MULTIPLE_IMAGE_TEXT
-        description: Standard images with text, presented one at a time. The user clicks on thumbnails to view each block.
+        description: >-
+          Standard images with text, presented one at a time. The user clicks on
+          thumbnails to view each block.
       - value: STANDARD_PRODUCT_DESCRIPTION
         description: Standard product description text.
       - value: STANDARD_SINGLE_IMAGE_HIGHLIGHTS
         description: A standard image with several paragraphs and a bulleted list.
       - value: STANDARD_SINGLE_IMAGE_SPECS_DETAIL
-        description: A standard image with paragraphs and a bulleted list, and extra space for technical details.
+        description: >-
+          A standard image with paragraphs and a bulleted list, and extra space
+          for technical details.
       - value: STANDARD_SINGLE_SIDE_IMAGE
         description: A standard headline and body text with an image on the side.
       - value: STANDARD_TECH_SPECS
@@ -1927,7 +2363,9 @@ definitions:
         $ref: '#/definitions/StandardImageTextBlock'
       sidebarListBlock:
         $ref: '#/definitions/StandardTextListBlock'
-    description: Two images, two paragraphs, and two bulleted lists. One image is smaller and displayed in the sidebar.
+    description: >-
+      Two images, two paragraphs, and two bulleted lists. One image is smaller
+      and displayed in the sidebar.
   StandardImageTextOverlayModule:
     type: object
     required:
@@ -1945,7 +2383,9 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/StandardImageTextCaptionBlock'
-    description: Standard images with text, presented one at a time. The user clicks on thumbnails to view each block.
+    description: >-
+      Standard images with text, presented one at a time. The user clicks on
+      thumbnails to view each block.
   StandardProductDescriptionModule:
     type: object
     required:
@@ -1989,7 +2429,9 @@ definitions:
         $ref: '#/definitions/StandardHeaderTextListBlock'
       specificationTextBlock:
         $ref: '#/definitions/StandardTextBlock'
-    description: A standard image with paragraphs and a bulleted list, and extra space for technical details.
+    description: >-
+      A standard image with paragraphs and a bulleted list, and extra space for
+      technical details.
   StandardSingleSideImageModule:
     type: object
     required:
@@ -2016,7 +2458,9 @@ definitions:
         minItems: 4
       tableCount:
         type: integer
-        description: The number of tables to present. Features are evenly divided between the tables.
+        description: >-
+          The number of tables to present. Features are evenly divided between
+          the tables.
         minimum: 1
         maximum: 2
     description: The standard table of technical feature names and definitions.
@@ -2049,7 +2493,10 @@ definitions:
     properties:
       position:
         type: integer
-        description: The rank or index of this comparison product block within the module. Different blocks cannot occupy the same position within a single module.
+        description: >-
+          The rank or index of this comparison product block within the module.
+          Different blocks cannot occupy the same position within a single
+          module.
         minimum: 1
         maximum: 6
       image:
@@ -2091,7 +2538,9 @@ definitions:
           $ref: '#/definitions/TextItem'
         maxItems: 8
         minItems: 0
-    description: The A+ Content standard fixed length list of text, usually presented as bullet points.
+    description: >-
+      The A+ Content standard fixed length list of text, usually presented as
+      bullet points.
   StandardImageTextCaptionBlock:
     type: object
     properties:
@@ -2099,7 +2548,9 @@ definitions:
         $ref: '#/definitions/StandardImageTextBlock'
       caption:
         $ref: '#/definitions/TextComponent'
-    description: The A+ Content standard image and text block, with a related caption. The caption may not display on all devices.
+    description: >-
+      The A+ Content standard image and text block, with a related caption. The
+      caption may not display on all devices.
   StandardImageCaptionBlock:
     type: object
     properties:
@@ -2125,7 +2576,9 @@ definitions:
         $ref: '#/definitions/TextComponent'
       body:
         $ref: '#/definitions/ParagraphComponent'
-    description: The A+ Content standard text box block, comprised of a paragraph with a headline.
+    description: >-
+      The A+ Content standard text box block, comprised of a paragraph with a
+      headline.
   StandardTextPairBlock:
     type: object
     properties:
@@ -2133,7 +2586,9 @@ definitions:
         $ref: '#/definitions/TextComponent'
       description:
         $ref: '#/definitions/TextComponent'
-    description: The A+ Content standard label and description block, comprised of a pair of text components.
+    description: >-
+      The A+ Content standard label and description block, comprised of a pair
+      of text components.
   TextItem:
     type: object
     required:
@@ -2142,7 +2597,9 @@ definitions:
     properties:
       position:
         type: integer
-        description: The rank or index of this text item within the collection. Different items cannot occupy the same position within a single collection.
+        description: >-
+          The rank or index of this text item within the collection. Different
+          items cannot occupy the same position within a single collection.
         minimum: 1
         maximum: 100
       text:
@@ -2156,7 +2613,9 @@ definitions:
     properties:
       position:
         type: integer
-        description: The rank or index of this text item within the collection. Different items cannot occupy the same position within a single collection.
+        description: >-
+          The rank or index of this text item within the collection. Different
+          items cannot occupy the same position within a single collection.
         minimum: 1
         maximum: 100
       value:
@@ -2164,7 +2623,9 @@ definitions:
         description: The actual plain text.
         minLength: 1
         maxLength: 250
-    description: Plain positional text, used in collections of brief labels and descriptors.
+    description: >-
+      Plain positional text, used in collections of brief labels and
+      descriptors.
   ImageComponent:
     type: object
     required:
@@ -2228,9 +2689,13 @@ definitions:
       - RIGHT
     x-docgen-enum-table-extension:
       - value: LEFT
-        description: Indicates that the content is to be positioned on the left side of the module.
+        description: >-
+          Indicates that the content is to be positioned on the left side of the
+          module.
       - value: RIGHT
-        description: Indicates that the content is to be positioned on the right side of the module.
+        description: >-
+          Indicates that the content is to be positioned on the right side of
+          the module.
   DecoratorSet:
     type: array
     description: A set of content decorators.
@@ -2244,20 +2709,29 @@ definitions:
         $ref: '#/definitions/DecoratorType'
       offset:
         type: integer
-        description: The starting character of this decorator within the content string. Use zero for the first character.
+        description: >-
+          The starting character of this decorator within the content string.
+          Use zero for the first character.
         minimum: 0
         maximum: 10000
       length:
         type: integer
-        description: The number of content characters to alter with this decorator. Decorators such as line breaks can have zero length and fit between characters.
+        description: >-
+          The number of content characters to alter with this decorator.
+          Decorators such as line breaks can have zero length and fit between
+          characters.
         minimum: 0
         maximum: 10000
       depth:
         type: integer
-        description: The relative intensity or variation of this decorator. Decorators such as bullet-points, for example, can have multiple indentation depths.
+        description: >-
+          The relative intensity or variation of this decorator. Decorators such
+          as bullet-points, for example, can have multiple indentation depths.
         minimum: 0
         maximum: 100
-    description: A decorator applied to a content string value in order to create rich text.
+    description: >-
+      A decorator applied to a content string value in order to create rich
+      text.
   DecoratorType:
     type: string
     description: The type of rich text decorator.
@@ -2272,7 +2746,9 @@ definitions:
       - STYLE_UNDERLINE
     x-docgen-enum-table-extension:
       - value: LIST_ITEM
-        description: Formatted list item, used in either numbered or bulleted lists, inside the list enclosure.
+        description: >-
+          Formatted list item, used in either numbered or bulleted lists, inside
+          the list enclosure.
       - value: LIST_ORDERED
         description: Numbered list enclosure.
       - value: LIST_UNORDERED
@@ -2364,7 +2840,10 @@ parameters:
   contentReferenceKey:
     name: contentReferenceKey
     in: path
-    description: 'The unique reference key for the A+ Content document. A content reference key cannot form a permalink and may change in the future. A content reference key is not guaranteed to match any A+ content identifier.  '
+    description: >-
+      The unique reference key for the A+ Content document. A content reference
+      key cannot form a permalink and may change in the future. A content
+      reference key is not guaranteed to match any A+ content identifier.  
     required: true
     type: string
     minLength: 1
@@ -2378,7 +2857,14 @@ parameters:
   pageToken:
     name: pageToken
     in: query
-    description: A page token from the nextPageToken response element returned by your previous call to this operation. nextPageToken is returned when the results of a call exceed the page size. To get the next page of results, call the operation and include pageToken as the only parameter. Specifying pageToken with any other parameter will cause the request to fail. When no nextPageToken value is returned there are no more pages to return. A pageToken value is not usable across different operations.
+    description: >-
+      A page token from the nextPageToken response element returned by your
+      previous call to this operation. nextPageToken is returned when the
+      results of a call exceed the page size. To get the next page of results,
+      call the operation and include pageToken as the only parameter. Specifying
+      pageToken with any other parameter will cause the request to fail. When no
+      nextPageToken value is returned there are no more pages to return. A
+      pageToken value is not usable across different operations.
     required: false
     type: string
     minLength: 1
